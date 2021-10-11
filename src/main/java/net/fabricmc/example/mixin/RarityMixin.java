@@ -4,7 +4,9 @@ import net.fabricmc.example.IExtensibleEnum;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import org.spongepowered.asm.mixin.Mixin;
-@Mixin(value = Rarity.class, priority = 1001)
+import org.spongepowered.asm.mixin.injection.Inject;
+
+@Mixin(Rarity.class)
 public class RarityMixin implements IExtensibleEnum {
 
     static {
