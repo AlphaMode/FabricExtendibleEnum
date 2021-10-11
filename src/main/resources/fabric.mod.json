@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "net.fabricmc.example.ExampleMod"
+    ],
+    "mm:early_risers" : [
+      "net.fabricmc.example.mixin.EEEarlyRiser"
     ]
   },
   "mixins": [
