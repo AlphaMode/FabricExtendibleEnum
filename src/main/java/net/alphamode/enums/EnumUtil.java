@@ -22,6 +22,7 @@ package net.alphamode.enums;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import net.minecraft.block.entity.BannerPattern;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 
@@ -35,6 +36,14 @@ public class EnumUtil {
 
     public static Rarity createRarity(String name, Formatting color) {
         return (Rarity) ((IExtensibleEnum) (Object) Rarity.COMMON).createEnum(name, color);
+    }
+
+    public static BannerPattern createBannerPattern(String name, String main, String hashNameIn) {
+        return (BannerPattern) ((IExtensibleEnum) (Object) BannerPattern.BASE).createEnum(name, main, hashNameIn, false);
+    }
+
+    public static BannerPattern createBannerPattern(String name, String main, String hashNameIn, boolean hasPatternItem) {
+        return (BannerPattern) ((IExtensibleEnum) (Object) BannerPattern.BASE).createEnum(name, main, hashNameIn, hasPatternItem);
     }
 
     public static  <T> T create(Class<T> enumClass, Class<?> classes, String name, Object... args) {

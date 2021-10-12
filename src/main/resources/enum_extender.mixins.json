@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_16",
   "plugin": "net.alphamode.enums.mixin.plugin.FEPlugin",
   "mixins": [
-    "RarityMixin"
+    "RarityMixin",
+    "BannerPatternMixin",
+    "EquipmentSlotMixin"
   ],
   "injectors": {
     "defaultRequire": 1

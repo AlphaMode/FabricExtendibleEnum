@@ -69,4 +69,11 @@ public interface IExtensibleEnum<T>
     default T createEnum(String name, Object... args) {
         return null;
     }
+
+    /**
+     * Used to instruct a new eum outside of mixin
+     */
+    default T createEnum(String name) {
+        return null;
+    }
 }
