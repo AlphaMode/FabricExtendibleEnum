@@ -30,6 +30,8 @@ import net.minecraft.util.Rarity;
  * A util class for adding to some common vanilla enums
  */
 public class EnumUtil {
+    public static final RuntimeEnumExtender enumExtender = new RuntimeEnumExtender();
+
     private static Method getCreateMethod(Class<?> clazz, Class<?>... args) throws NoSuchMethodException {
         return clazz.getDeclaredMethod("create", args);
     }

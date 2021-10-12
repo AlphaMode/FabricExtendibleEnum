@@ -18,6 +18,9 @@
   "entrypoints": {
     "main": [
       "net.alphamode.test.enums.EnumTest"
+    ],
+    "mm:early_risers": [
+      "net.alphamode.test.enums.ER"
     ]
   },
   "depends": {

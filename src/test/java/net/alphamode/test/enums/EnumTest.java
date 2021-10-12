@@ -27,6 +27,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.apache.logging.log4j.LogManager;
 
 public class EnumTest implements ModInitializer {
 
@@ -34,7 +35,7 @@ public class EnumTest implements ModInitializer {
     public void onInitialize() {
         Registry.register(Registry.ITEM, new Identifier("enum_adder", "green"), new Item(new Item.Settings().group(ItemGroup.MISC).rarity(EnumUtil.createRarity("GREEN", Formatting.DARK_GREEN))));
         Registry.register(Registry.ITEM, new Identifier("enum_adder", "cyan"), new Item(new Item.Settings().group(ItemGroup.MISC).rarity(EnumUtil.createRarity("CYAN", Formatting.DARK_AQUA))));
-//        MyEnum.create("BAR");
-//        LogManager.getLogger().info(MyEnum.values());
+        MyEnum.create("BAR");
+        LogManager.getLogger().info(MyEnum.values());
     }
 }

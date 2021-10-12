@@ -19,6 +19,7 @@
 
 package net.alphamode.enums.mixin.plugin;
 
+import net.alphamode.enums.EnumUtil;
 import net.alphamode.enums.RuntimeEnumExtender;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.MappingResolver;
@@ -31,8 +32,6 @@ import java.util.List;
 import java.util.Set;
 
 public class FEPlugin implements IMixinConfigPlugin {
-    private RuntimeEnumExtender enumExtender = new RuntimeEnumExtender();
-    private MappingResolver resolver = FabricLoader.getInstance().getMappingResolver();
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -66,7 +65,7 @@ public class FEPlugin implements IMixinConfigPlugin {
     @Override
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
         if(targetClass.interfaces.contains("net/alphamode/enums/IExtensibleEnum")) {
-            enumExtender.processClassWithFlags(targetClass, Type.getObjectType(targetClassName.replace('.', '/')));
+            EnumUtil.enumExtender.processClassWithFlags(targetClass, Type.getObjectType(targetClassName.replace('.', '/')));
         }
     }
 }
