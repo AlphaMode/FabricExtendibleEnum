@@ -1,4 +1,23 @@
-package net.fabricmc.example;
+/*
+ * Minecraft Forge, AlphaMode
+ * Copyright (c) 2021.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation version 2.1
+ * of the License.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ */
+
+package net.alphamode.enums;
 
 import com.mojang.serialization.Codec;
 
@@ -27,7 +46,7 @@ import java.util.function.Supplier;
  * {@code create} methods <strong>can</strong> be defined as long as each
  * matches a constructor.
  */
-public interface IExtensibleEnum
+public interface IExtensibleEnum<T>
 {
     /**
      * Called by generated factory code to do any post-constructor setup required by
@@ -41,5 +60,13 @@ public interface IExtensibleEnum
      */
     static <E extends Enum<E> & StringIdentifiable> Codec<E> createCodecForExtensibleEnum(Supplier<E[]> valuesSupplier, Function<? super String, ? extends E> enumValueFromNameFunction) {
         return StringIdentifiable.createCodec(Enum::ordinal, (id) -> valuesSupplier.get()[id], enumValueFromNameFunction);
+    }
+
+
+    /**
+     * Used to instruct a new eum outside of mixin
+     */
+    default T createEnum(String name, Object... args) {
+        return null;
     }
 }

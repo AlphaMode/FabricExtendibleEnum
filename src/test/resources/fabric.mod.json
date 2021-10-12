@@ -1,13 +1,11 @@
 {
   "schemaVersion": 1,
-  "id": "enum_extender",
+  "id": "enum_extension_test",
   "version": "1.0",
-
-  "name": "Enum Extender",
-  "description": "A small library that implements forge's IExtensibleEnum system to fabric.",
+  "name": "Enum Extender Test",
+  "description": "Test mod for enum extensions",
   "authors": [
-    "AlphaMode",
-    "The Forge Team"
+    "AlphaMode"
   ],
   "contact": {
     "sources": "https://github.com/AlphaMode/FabricExtendibleEnum"
@@ -15,19 +13,17 @@
   "license": "LGPL 2.1",
   "environment": "*",
   "mixins": [
-    "enum_extender.mixins.json"
+    "enum_extender_test.mixins.json"
   ],
+  "entrypoints": {
+    "main": [
+      "net.alphamode.test.enums.EnumTest"
+    ]
+  },
   "depends": {
     "fabricloader": ">=0.11.3",
     "fabric": "*",
     "minecraft": "1.17.x",
     "java": ">=16"
-  },
-  "custom": {
-    "modmenu": {
-      "badges": [
-        "library"
-      ]
-    }
   }
 }

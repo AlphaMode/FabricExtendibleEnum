@@ -1,6 +1,25 @@
-package net.fabricmc.example.mixin.plugin;
+/*
+ * AlphaMode
+ * Copyright (c) 2021.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation version 2.1
+ * of the License.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ */
 
-import net.fabricmc.example.RuntimeEnumExtender;
+package net.alphamode.enums.mixin.plugin;
+
+import net.alphamode.enums.RuntimeEnumExtender;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.MappingResolver;
 import org.objectweb.asm.Type;
@@ -42,14 +61,12 @@ public class FEPlugin implements IMixinConfigPlugin {
 
     @Override
     public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
-        if(targetClassName.equals(resolver.mapClassName("intermediary","net.minecraft.class_1814"))) {
-            enumExtender.processClassWithFlags(true, targetClass, Type.getObjectType(resolver.mapClassName("intermediary","net.minecraft.class_1814").replace('.', '/')));
-        }
-        //resolver.mapClassName("intermediary","net.minecraft.class_1814"), classNode -> enumExtender.processClassWithFlags(true, classNode, Type.getObjectType(resolver.mapClassName("intermediary","net.minecraft.class_1814").replace('.', '/')))
     }
 
     @Override
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
-
+        if(targetClass.interfaces.contains("net/alphamode/enums/IExtensibleEnum")) {
+            enumExtender.processClassWithFlags(targetClass, Type.getObjectType(targetClassName.replace('.', '/')));
+        }
     }
 }

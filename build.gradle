@@ -7,11 +7,38 @@ sourceCompatibility = JavaVersion.VERSION_16
 targetCompatibility = JavaVersion.VERSION_16
 
 archivesBaseName = project.archives_base_name
-version = project.mod_version
+version = project.version
 group = project.maven_group
 
 repositories {
 	maven { url 'https://jitpack.io' }
+	maven {
+		url = "https://maven.terraformersmc.com/releases/"
+	}
+}
+
+sourceSets {
+	test {
+		compileClasspath += main.compileClasspath
+		runtimeClasspath += main.runtimeClasspath
+	}
+}
+
+loom {
+	runs {
+		testClient {
+			client()
+			ideConfigGenerated project.rootProject == project
+			name = "Testmod Client"
+			source sourceSets.test
+		}
+		testServer {
+			server()
+			ideConfigGenerated project.rootProject == project
+			name = "Testmod Server"
+			source sourceSets.test
+		}
+	}
 }
 
 dependencies {
@@ -20,10 +47,12 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	modRuntimeOnly "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	modRuntimeOnly "com.terraformersmc:modmenu:2.0.2"
+}
 
-	implementation 'com.github.Chocohead:Fabric-ASM:v2.3'
+sourceSets {
+	test
 }
 
 processResources {

@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.alphamode.test.enums.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+    "MyEnumMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
