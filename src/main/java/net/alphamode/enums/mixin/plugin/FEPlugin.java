@@ -19,22 +19,16 @@
 
 package net.alphamode.enums.mixin.plugin;
 
-import com.chocohead.mm.api.ClassTinkerers;
 import net.alphamode.enums.RuntimeEnumExtender;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.MappingResolver;
-import net.fabricmc.loader.entrypoint.minecraft.hooks.EntrypointUtils;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-
-import net.minecraft.util.Formatting;
 
 public class FEPlugin implements IMixinConfigPlugin {
     private final RuntimeEnumExtender enumExtender = new RuntimeEnumExtender();
