@@ -18,12 +18,13 @@
   "entrypoints": {
     "main": [
       "net.alphamode.test.enums.EnumTest"
+    ],
+    "enum": [
+      "net.alphamode.test.enums.PreLaunch"
     ]
   },
   "depends": {
-    "fabricloader": ">=0.11.3",
-    "fabric": "*",
-    "minecraft": "1.17.x",
-    "java": ">=16"
+    "fabricloader": ">=0.12.12",
+    "fabric": "*"
   }
 }

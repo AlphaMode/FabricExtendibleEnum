@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -52,9 +51,10 @@ public class RuntimeEnumExtender {
 
     public boolean handlesClass(Type classType, boolean isEmpty)
     {
-        return isEmpty ? false : true;
+        return !isEmpty;
     }
 
+    @SuppressWarnings("ALL")
     public static Enum<?> createEnum(Class<?> enumClass, Class... args) {
         Enum<?> enom = null;
         try {
@@ -65,10 +65,10 @@ public class RuntimeEnumExtender {
         return enom;
     }
 
-    public int processClassWithFlags(final ClassNode classNode, final Type classType)
+    public void processClassWithFlags(final ClassNode classNode, final Type classType)
     {
         if ((classNode.access & Opcodes.ACC_ENUM) == 0)
-            return 0;
+            return;
 
         Type array = Type.getType("[" + classType.getDescriptor());
         final int flags = Opcodes.ACC_PRIVATE | Opcodes.ACC_STATIC | Opcodes.ACC_FINAL | Opcodes.ACC_SYNTHETIC;
@@ -76,7 +76,7 @@ public class RuntimeEnumExtender {
         FieldNode values = classNode.fields.stream().filter(f -> f.desc.contentEquals(array.getDescriptor()) && ((f.access & flags) == flags)).findFirst().orElse(null);
 
         if (!classNode.interfaces.contains(MARKER_IFACE.getInternalName())) {
-            return 0;
+            return;
         }
 
         //Static methods named "create" with first argument as a string
@@ -114,8 +114,7 @@ public class RuntimeEnumExtender {
             Type[] ctrArgs = new Type[args.length + 1];
             ctrArgs[0] = STRING;
             ctrArgs[1] = Type.INT_TYPE;
-            for (int x = 1; x < args.length; x++)
-                ctrArgs[1 + x] = args[x];
+            System.arraycopy(args, 1, ctrArgs, 2, args.length - 1);
 
             String desc = Type.getMethodDescriptor(Type.VOID_TYPE, ctrArgs);
 
@@ -219,7 +218,6 @@ public class RuntimeEnumExtender {
                 ins.areturn(classType);
             }
         });
-        return ClassWriter.COMPUTE_FRAMES;
     }
 
 }

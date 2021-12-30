@@ -19,6 +19,9 @@
 
 package net.alphamode.enums;
 
+import com.chocohead.mm.api.ClassTinkerers;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.MappingResolver;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -30,30 +33,29 @@ import net.minecraft.util.Rarity;
  * A util class for adding to some common vanilla enums
  */
 public class EnumUtil {
+
+    private static final MappingResolver resolver = FabricLoader.getInstance().getMappingResolver();
+
     private static Method getCreateMethod(Class<?> clazz, Class<?>... args) throws NoSuchMethodException {
         return clazz.getDeclaredMethod("create", args);
     }
 
     public static Rarity createRarity(String name, Formatting color) {
-        return (Rarity) ((IExtensibleEnum) (Object) Rarity.COMMON).createEnum(name, color);
+        return ((IExtensibleEnum<Rarity>) (Object) Rarity.COMMON).createEnum(name, color);
     }
 
     public static BannerPattern createBannerPattern(String name, String main, String hashNameIn) {
-        return (BannerPattern) ((IExtensibleEnum) (Object) BannerPattern.BASE).createEnum(name, main, hashNameIn, false);
+        return ((IExtensibleEnum<BannerPattern>) (Object) BannerPattern.BASE).createEnum(name, main, hashNameIn, false);
     }
 
     public static BannerPattern createBannerPattern(String name, String main, String hashNameIn, boolean hasPatternItem) {
-        return (BannerPattern) ((IExtensibleEnum) (Object) BannerPattern.BASE).createEnum(name, main, hashNameIn, hasPatternItem);
+        return ((IExtensibleEnum<BannerPattern>) (Object) BannerPattern.BASE).createEnum(name, main, hashNameIn, hasPatternItem);
     }
 
-    public static  <T> T create(Class<T> enumClass, Class<?> classes, String name, Object... args) {
+    public static <T> T create(Class<T> enumClass, Class<?> classes, String name, Object... args) {
         try {
             return (T) getCreateMethod(enumClass, classes).invoke(null, args);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
         }
         return null;

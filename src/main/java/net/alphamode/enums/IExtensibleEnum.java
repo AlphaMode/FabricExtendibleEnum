@@ -64,14 +64,14 @@ public interface IExtensibleEnum<T>
 
 
     /**
-     * Used to instruct a new eum outside of mixin
+     * Used to instruct a new eum outside a mixin
      */
     default T createEnum(String name, Object... args) {
         return null;
     }
 
     /**
-     * Used to instruct a new eum outside of mixin
+     * Used to instruct a new eum outside a mixin
      */
     default T createEnum(String name) {
         return null;

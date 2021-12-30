@@ -21,6 +21,7 @@ package net.alphamode.test.enums;
 
 import net.alphamode.enums.EnumUtil;
 import net.fabricmc.api.ModInitializer;
+import org.apache.logging.log4j.LogManager;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -34,7 +35,7 @@ public class EnumTest implements ModInitializer {
     public void onInitialize() {
         Registry.register(Registry.ITEM, new Identifier("enum_adder", "green"), new Item(new Item.Settings().group(ItemGroup.MISC).rarity(EnumUtil.createRarity("GREEN", Formatting.DARK_GREEN))));
         Registry.register(Registry.ITEM, new Identifier("enum_adder", "cyan"), new Item(new Item.Settings().group(ItemGroup.MISC).rarity(EnumUtil.createRarity("CYAN", Formatting.DARK_AQUA))));
-//        MyEnum.create("BAR");
-//        LogManager.getLogger().info(MyEnum.values());
+        //MyEnum.create("BAR");
+        LogManager.getLogger().info(MyEnum.values());
     }
 }
